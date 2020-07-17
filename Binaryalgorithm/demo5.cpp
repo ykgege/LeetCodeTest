@@ -16,21 +16,32 @@
 class Solution {
 public:
     int kthToLast(ListNode* head, int k) {
-        if(head == nullptr)           
+        if(head == nullptr)
+        {
             return 0;
-        ListNode *pre = head;      
-        ListNode *p = head;           
-        int i = 0;              
-        while(i < k){
-            if(p == nullptr)       
-                return 0;
-            p = p->next;
-            i++;
         }
-        while(p != nullptr){       
-            pre = pre->next;
+        int size = 0;
+        ListNode *p = head;
+        while(p)
+        {
+            size++;
             p = p->next;
         }
-        return pre->val;
+        if(k>size)
+        {
+            return 0;
+        }
+        size -= k;
+        p = head;
+        if(size == 0)
+        {
+            return head->val;
+        }
+        while(--size)
+        {
+            p = p->next;
+        }
+        return p->next->val;
+
     }
 };
